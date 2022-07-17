@@ -15,6 +15,7 @@ on:
 
 env:
   dacpacArtifactName: dacpac
+  dacpacFileName: HagaiDataBase.dacpac
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -41,3 +42,15 @@ jobs:
           name: ${{env.dacpacArtifactName}}
           path: ${{env.outputDirectory}}
           if-no-files-found: error
+  Sandbox:
+    runs-on: [self-hosted, Linux]
+    environment: Sandbox
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.0.8
+      with:
+        name: ${{env.dacpacArtifactName}}
+        path: ${{env.dacpacArtifactName}}
+    - name: Deploy
+      run: sqlpackage /a:Publish /SourceFile:${{env.dacpacArtifactName}}/${{env.dacpacFileName}} /TargetDatabaseName:${{secrets.SQL_DATABASE_NAME}} /TargetUser:${{secrets.SQL_USERNAME}} /TargetPassword:"${{secrets.SQL_SERVER_NAME}}" /TargetServerName:${{secrets.SQL_PASSWORD}} 
+        
