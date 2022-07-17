@@ -32,9 +32,11 @@ jobs:
         with:
           dotnet-version: '6.0.x'
       - name: Install dependencies
+        run: dotnet --list-sdks
+      - name: Install dependencies
         run: dotnet restore ${{env.projectPath}} 
       - name: Build
-        run: dotnet build /p:NetCoreBuild=true ${{env.projectPath}} --configuration Release --no-restore
+        run: dotnet build /p:NetCoreBuild=true ${{env.projectPath}} --configuration Release 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.2
         with:
