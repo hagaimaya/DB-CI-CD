@@ -44,6 +44,7 @@ jobs:
           if-no-files-found: error
   Sandbox:
     runs-on: [self-hosted, Linux]
+    needs: build
     environment: Sandbox
     steps:
     - name: Download a Build Artifact
