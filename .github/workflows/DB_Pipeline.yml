@@ -53,5 +53,5 @@ jobs:
         name: ${{env.dacpacArtifactName}}
         path: ${{env.dacpacArtifactName}}
     - name: Deploy
-      run: /home/hagai/sqlpackage /a:Publish /SourceFile:${{env.dacpacArtifactName}}/${{env.dacpacFileName}} /TargetDatabaseName:${{secrets.SQL_DATABASE_NAME}} /TargetUser:${{secrets.SQL_USERNAME}} /TargetPassword:"${{secrets.SQL_SERVER_NAME}}" /TargetServerName:${{secrets.SQL_PASSWORD}} 
+      run: /home/hagai/sqlpackage/sqlpackage /a:Publish /SourceFile:${{env.dacpacArtifactName}}/${{env.dacpacFileName}} /TargetDatabaseName:${{secrets.SQL_DATABASE_NAME}} /TargetUser:${{secrets.SQL_USERNAME}} /TargetPassword:"${{secrets.SQL_SERVER_NAME}}" /TargetServerName:${{secrets.SQL_PASSWORD}} 
         
